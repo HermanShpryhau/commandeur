@@ -1,0 +1,19 @@
+package dev.shph.commandeur.container;
+
+public class CommandeurException extends Exception {
+    public CommandeurException() {
+        super();
+    }
+
+    public CommandeurException(String message) {
+        super(message);
+    }
+
+    public CommandeurException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public CommandeurException(Throwable cause) {
+        super(cause);
+    }
+}
