@@ -66,4 +66,23 @@ public final class AnnotationScanningContainer implements CommandContainer {
     public Command resolve(String commandName) {
         return Optional.ofNullable(container.get(commandName)).orElse(new Command.Empty());
     }
+
+
+    @Override
+    public void register(String commandName, Class<?> commandClass) {
+        try {
+            Command commandInstance = (Command) commandClass.newInstance();
+            register(commandName, commandInstance);
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new CommandeurException("Cannot create instance of " + commandClass.getName(), e);
+        }
+    }
+
+    @Override
+    public void register(String commandName, Command command) {
+        if (container.get(commandName) != null) {
+            throw new CommandeurException("Duplicate command name \"" + commandName +"\"");
+        }
+        container.put(commandName, command);
+    }
 }
