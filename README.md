@@ -4,6 +4,22 @@ It also provides a mechanism to automatically find and load commands into contai
 
 ## Usage
 
+### Installation
+First you will need to add the downloaded jar file to your local maven repo. You can do so with the following command:
+
+```
+$ mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file -Dfile=<path-to-file>
+```
+
+Then simply add the dependecy to your `pom.xml`.
+```xml
+<dependency>
+    <groupId>dev.shph.commandeur</groupId>
+    <artifactId>commandeur</artifactId>
+    <version>0.1.1</version>
+</dependency>
+```
+
 ### Initializing a container
 
 **Comandeur** provides `CommandContainer` interface to a container. For now its only implementation is 
