@@ -34,13 +34,8 @@ public class CommandContainerInitializer implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        try {
-            CommandContainer container = new AnnotaionScanningContainer();
-            sce.getServletContext().setAttribute("commandContainer", container);
-        } catch (ContainerInitializationException e) {
-            logger.error("Unable to initialize command dispatcher. {}", e.getMessage());
-            throw new RuntimeException("Unable to initialize command container.", e);
-        }
+        CommandContainer container = new AnnotaionScanningContainer();
+        sce.getServletContext().setAttribute("commandContainer", container);
     }
 }
 ```
