@@ -22,7 +22,6 @@ public final class AnnotationScanningContainer implements CommandContainer {
 
     /**
      * Creates container by scanning the whole class path
-     * @throws CommandeurException
      */
     public AnnotationScanningContainer() throws CommandeurException {
         this(new Reflections());
@@ -33,13 +32,12 @@ public final class AnnotationScanningContainer implements CommandContainer {
      * and its sub-packages.
      *
      * @param basePackage Identifier of base package
-     * @throws CommandeurException
      */
-    public AnnotationScanningContainer(String basePackage) throws CommandeurException {
+    public AnnotationScanningContainer(String basePackage) {
         this(new Reflections(basePackage));
     }
 
-    private AnnotationScanningContainer(Reflections reflections) throws CommandeurException {
+    private AnnotationScanningContainer(Reflections reflections) {
         Set<Class<?>> discoverableCommands = reflections.getTypesAnnotatedWith(DiscoverableCommand.class).stream()
                 .filter(clazz -> Arrays.asList(clazz.getInterfaces()).contains(Command.class))
                 .collect(Collectors.toSet());
@@ -66,7 +64,6 @@ public final class AnnotationScanningContainer implements CommandContainer {
     public Command resolve(String commandName) {
         return Optional.ofNullable(container.get(commandName)).orElse(new Command.Empty());
     }
-
 
     @Override
     public void register(String commandName, Class<?> commandClass) {

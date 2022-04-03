@@ -1,6 +1,6 @@
 package dev.shph.commandeur.container;
 
-public class CommandeurException extends Exception {
+public class CommandeurException extends RuntimeException {
     public CommandeurException() {
         super();
     }
